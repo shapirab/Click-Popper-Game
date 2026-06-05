@@ -1,0 +1,22 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.board--container{
+    border: 5px solid red;
+    width: 700px;
+    height: 700px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.box{
+    border: 1px solid #ccc;
+    display: flex;
+    padding-top: 1rem;
+    justify-content: center;
+    color: #aaa;
+    font-size: 2rem;
+}
