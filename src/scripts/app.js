@@ -4,11 +4,14 @@ const happyImg = document.getElementById('happy');
 
 let boxNum = 16;
 let boxes = [];
+//similar approach for positive icons
+let pointValues = [50,75,100,150,200,250,-10,-50,-200];
 
 startBtn.addEventListener('click', ()=>{
     console.log('game starts');
     drawBoard();
-    highlightBox(boxes[3], 100, happyImg);
+    highlightBox();
+    //highlightBoxContent(boxes[3], 100, happyImg);
 });
 
 function drawBoard(){
@@ -25,11 +28,31 @@ function drawBoard(){
     }
 }
 
-function highlightBox(box, scoreValue, emoji){
+function highlightBox(){
+    let scoreValue = setPointValue();
+    let box = setActiveBox();
+    let emoji = happyImg;
+
+    highlightBoxContent(box, scoreValue, emoji);
+    box.addEventListener('click', (e) => {});
+
+}
+
+function highlightBoxContent(box, scoreValue, emoji){
     box.classList.remove('box');
     box.className = 'highlighted';
     emoji.className = 'showEmoji';
     box.innerText = scoreValue;   
     console.log(emoji)
     box.appendChild(emoji);
+}
+
+function setPointValue(){
+    let pointIndex = Math.floor(Math.random() * pointValues.length);
+    return pointValues[pointIndex];
+}
+
+function setActiveBox(){
+    let boxIndex = Math.floor(Math.random() * boxes.length);
+    return boxes[boxIndex];
 }
