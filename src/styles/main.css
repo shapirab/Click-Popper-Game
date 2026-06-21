@@ -20,3 +20,24 @@
     color: #aaa;
     font-size: 2rem;
 }
+
+.hidden{
+    display: none;
+}
+
+.highlighted{
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid #059c85;
+    background-color: #bafff5;
+    font-weight: 700;
+    font-size: 3rem;
+}
+
+.showEmoji{
+    display: block;
+    width: 50px;
+    height: 50px;
+}

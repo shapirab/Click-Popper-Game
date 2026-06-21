@@ -1,10 +1,14 @@
 const container = document.querySelector('.container');
 const startBtn = document.getElementById('start-btn');
+const happyImg = document.getElementById('happy');
+
 let boxNum = 16;
-console.log(container)
+let boxes = [];
+
 startBtn.addEventListener('click', ()=>{
     console.log('game starts');
     drawBoard();
+    highlightBox(boxes[3], 100, happyImg);
 });
 
 function drawBoard(){
@@ -17,7 +21,15 @@ function drawBoard(){
         box.className = 'box';
         box.innerText = i + 1;
         boardContainer.appendChild(box);
+        boxes.push(box);
     }
-    console.log(container)
+}
 
+function highlightBox(box, scoreValue, emoji){
+    box.classList.remove('box');
+    box.className = 'highlighted';
+    emoji.className = 'showEmoji';
+    box.innerText = scoreValue;   
+    console.log(emoji)
+    box.appendChild(emoji);
 }
