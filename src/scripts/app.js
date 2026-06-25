@@ -8,10 +8,8 @@ let boxes = [];
 let pointValues = [50,75,100,150,200,250,-10,-50,-200];
 
 startBtn.addEventListener('click', ()=>{
-    console.log('game starts');
     drawBoard();
-    highlightBox();
-    //highlightBoxContent(boxes[3], 100, happyImg);
+    highlightBox(setActiveBox());
 });
 
 function drawBoard(){
@@ -28,14 +26,31 @@ function drawBoard(){
     }
 }
 
-function highlightBox(){
+function highlightBox(box){
     let scoreValue = setPointValue();
-    let box = setActiveBox();
     let emoji = happyImg;
 
     highlightBoxContent(box, scoreValue, emoji);
-    box.addEventListener('click', (e) => {});
 
+   addClick(box);
+}
+
+function addClick(box){
+    box.addEventListener('click', (e) => {
+        resetBox(box);
+        highlightBox(setActiveBox());
+    }, {once: true});
+}
+
+function resetBox(box){
+    let boxIndex = boxes.indexOf(box);
+    let child = box.querySelector('.showEmoji');
+    if(child){
+        child.remove();
+    }
+    box.classList.remove('highlighted');
+    box.className = 'box';
+     box.innerText = boxIndex + 1;
 }
 
 function highlightBoxContent(box, scoreValue, emoji){
@@ -43,7 +58,6 @@ function highlightBoxContent(box, scoreValue, emoji){
     box.className = 'highlighted';
     emoji.className = 'showEmoji';
     box.innerText = scoreValue;   
-    console.log(emoji)
     box.appendChild(emoji);
 }
 
