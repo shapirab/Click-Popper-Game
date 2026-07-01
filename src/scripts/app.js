@@ -6,14 +6,20 @@ let boxNum = 16;
 let boxes = [];
 //similar approach for positive icons
 let pointValues = [50,75,100,150,200,250,-10,-50,-200];
+let score = 0;
+
+let scoreDisplay = document.createElement('span');
+scoreDisplay.innerText = score;
 
 startBtn.addEventListener('click', ()=>{
     drawBoard();
     highlightBox(setActiveBox());
+    score = 0;
 });
 
 function drawBoard(){
     container.removeChild(startBtn);
+    
     let boardContainer = document.createElement('div');
     boardContainer.className = 'board--container';
     container.appendChild(boardContainer);
@@ -24,6 +30,12 @@ function drawBoard(){
         boardContainer.appendChild(box);
         boxes.push(box);
     }
+
+    let scoreContainer = document.createElement('div');
+    scoreContainer.innerText = 'Score: ';
+    container.appendChild(scoreContainer);
+    scoreContainer.appendChild(scoreDisplay);
+
 }
 
 function highlightBox(box){
@@ -32,13 +44,15 @@ function highlightBox(box){
 
     highlightBoxContent(box, scoreValue, emoji);
 
-   addClick(box);
+   addClick(box, scoreValue);
 }
 
-function addClick(box){
+function addClick(box, scoreValue){
     box.addEventListener('click', (e) => {
         resetBox(box);
         highlightBox(setActiveBox());
+        score += scoreValue;
+        scoreDisplay.innerText = score;
     }, {once: true});
 }
 
